@@ -75,7 +75,8 @@ namespace Task1_Newton
         {
             if (eps >= 1) eps = 0.0000001;
             if (n < 2) return Double.NaN;
-            if (n % 2 == 0 && num < 0) return Double.NaN;
+            if (n % 2 == 0 && num <= 0) return Double.NaN;
+            if (num == 0) return 0;
             double res = num;
             double prev = 0;
             while (Math.Abs(prev - res) >= eps)

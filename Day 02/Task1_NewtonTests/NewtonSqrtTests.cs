@@ -2,12 +2,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Task1_Newton;
+
 namespace Task1_NewtonTests
 {
     [TestClass]
     public class NewtonSqrtTests
     {
-        public TestContext TestContext { get; set; }
+        public Microsoft.VisualStudio.TestTools.UnitTesting.TestContext TestContext { get; set; }
 
         [TestMethod]
         public void Sqrt_TheRootOfThe2Degree4_2()
@@ -84,7 +85,6 @@ namespace Task1_NewtonTests
             Assert.AreEqual(expectedResult, realResult, 0.00001);
         }
 
-
         [TestMethod]
         public void Sqrt_TheRootOfThe2DegreeNegative9_3()
         {
@@ -96,7 +96,6 @@ namespace Task1_NewtonTests
             //Assert
             Assert.AreEqual(expectedResult, realResult, 0.00001);
         }
-
 
     }
 }
