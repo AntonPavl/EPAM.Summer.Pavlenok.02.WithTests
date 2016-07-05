@@ -11,27 +11,6 @@ namespace Task1_Newton
     /// </summary>
     public class NewtonSqrt
     {
-        /// <summary>
-        /// Evaluate num^(1/n) with epsilon
-        /// </summary>
-        /// <param name="num">Number under the root</param>
-        /// <param name="n">Root level</param>
-        /// <param name="eps">Epsilon of result. Must be less than 1 else default eps </param>
-        /// <returns>Returns num^(1/n)</returns>
-        public static double Sqrt(double num, int n, double eps)
-        {
-            if (eps >= 1) eps = 0.0000001;
-            if (n < 2) return Double.NaN;
-            if (n % 2 == 0 && num < 0) return Double.NaN;
-            double res = num;
-            double prev = 0;    
-            while (Math.Abs(prev-res)>=eps)
-            {
-                prev = res;
-                res = (1.0 / n) * ((n - 1) * res + num / (Math.Pow(res, n - 1)));
-            }           
-            return res;
-        }
 
         /// <summary>
         /// Evaluate num^(1/2)
@@ -42,14 +21,13 @@ namespace Task1_Newton
         {
             return Sqrt(num, 2);
         }
-
         /// <summary>
         /// Evaluate num^(1/2) and save worktime
         /// </summary>
         /// <param name="num">Number under the root</param>
         /// <param name="workedtime">Buffer for worktime</param>
         /// <returns>Returns num^(1/2)</returns>
-        public static double Sqrt(double num,out double workedtime)
+        public static double Sqrt(double num, out double workedtime)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var res = Sqrt(num);
@@ -69,6 +47,7 @@ namespace Task1_Newton
             return Sqrt(num, n, 0.0000001);
         }
 
+
         /// <summary>
         /// Evaluate num^(1/n) and save worktime
         /// </summary>
@@ -82,6 +61,28 @@ namespace Task1_Newton
              var res = Sqrt(num, n);
             watch.Stop();
             workedtime = watch.ElapsedTicks;
+            return res;
+        }
+
+        /// <summary>
+        /// Evaluate num^(1/n) with epsilon
+        /// </summary>
+        /// <param name="num">Number under the root</param>
+        /// <param name="n">Root level</param>
+        /// <param name="eps">Epsilon of result. Must be less than 1 else default eps </param>
+        /// <returns>Returns num^(1/n)</returns>
+        public static double Sqrt(double num, int n, double eps)
+        {
+            if (eps >= 1) eps = 0.0000001;
+            if (n < 2) return Double.NaN;
+            if (n % 2 == 0 && num < 0) return Double.NaN;
+            double res = num;
+            double prev = 0;
+            while (Math.Abs(prev - res) >= eps)
+            {
+                prev = res;
+                res = (1.0 / n) * ((n - 1) * res + num / (Math.Pow(res, n - 1)));
+            }
             return res;
         }
 
@@ -101,5 +102,7 @@ namespace Task1_Newton
             workedtime = watch.ElapsedTicks;
             return res;
         }
+
+
     }
 }
