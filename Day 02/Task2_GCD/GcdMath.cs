@@ -98,6 +98,8 @@ namespace Task2_GCD
             if (a == b) return a;
             if (a == 0) return b;
             if (b == 0) return a;
+            a = a > 0 ? a : a * -1;
+            b = b > 0 ? b : b * -1;
             if ((a & 1)==0) // a is even
             {
                 if ((b & 1)==1) return SteineGcd(a/2, b); // b is odd

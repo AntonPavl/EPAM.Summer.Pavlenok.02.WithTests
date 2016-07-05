@@ -41,10 +41,10 @@ namespace Task2_GCD.NTests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        [TestCase(null,null)]
-        public void EwclideGcd_Args_ArgumentNullExeption(int res, params int[] arg)
+        [TestCase()]
+        public void EwclideGcd_Args_ArgumentNullExeption()
         {
-            GcdMath.EwclideGcd(arg);
+            GcdMath.EwclideGcd();
         }
 
         [Test]

@@ -41,10 +41,10 @@ namespace Task2_GCD.NTests
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        [TestCase(null, null)]
-        public void SteineGcd_Args_ArgumentNullExeption(int res, params int[] arg)
+        [TestCase()]
+        public void SteineGcd_Args_ArgumentNullExeption()
         {
-            GcdMath.SteineGcd(arg);
+            GcdMath.SteineGcd();
         }
 
         [Test]
