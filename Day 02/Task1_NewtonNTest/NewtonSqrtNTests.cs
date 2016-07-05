@@ -14,7 +14,7 @@ namespace Task1_NewtonNTest
         [TestCase(0,3,0)]
         [TestCase(Int32.MaxValue, 2, 46340.95000105)]
         [TestCase(Int32.MinValue, 2, Double.NaN)]
-        public void Sqrt(double num, int n, double res)
+        public void Sqrt_Num_Root_Result(double num, int n, double res)
         {
             if (Double.IsNaN(res))
             {
