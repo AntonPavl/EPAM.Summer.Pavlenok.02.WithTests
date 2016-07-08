@@ -46,7 +46,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Task2_NOD\Task2_GCD.csproj">
+    <ProjectReference Include="..\Task2_GCD\Task2_GCD.csproj">
       <Project>{5af0457b-16c0-4709-9bb4-4057451932eb}</Project>
       <Name>Task2_GCD</Name>
     </ProjectReference>

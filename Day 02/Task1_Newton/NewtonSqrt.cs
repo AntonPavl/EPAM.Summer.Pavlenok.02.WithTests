@@ -17,10 +17,7 @@ namespace Task1_Newton
         /// </summary>
         /// <param name="num">Number under the root</param>
         /// <returns>Returns num^(1/2)</returns>
-        public static double Sqrt(double num)
-        {
-            return Sqrt(num, 2);
-        }
+        public static double Sqrt(double num) => Sqrt(num, 2);
         /// <summary>
         /// Evaluate num^(1/2) and save worktime
         /// </summary>
@@ -42,10 +39,7 @@ namespace Task1_Newton
         /// <param name="num">Number under the root</param>
         /// <param name="n">Root level</param>
         /// <returns>Returns num^(1/n)</returns>
-        public static double Sqrt(double num, int n)
-        {
-            return Sqrt(num, n, 0.0000001);
-        }
+        public static double Sqrt(double num, int n) => Sqrt(num, n, 0.0000001);
 
 
         /// <summary>
@@ -74,8 +68,8 @@ namespace Task1_Newton
         public static double Sqrt(double num, int n, double eps)
         {
             if (eps >= 1) eps = 0.0000001;
-            if (n < 2) return Double.NaN;
-            if (n % 2 == 0 && num <= 0) return Double.NaN;
+            if (n < 2) return Double.NaN; //throw new argumentexep
+            if (n % 2 == 0 && num <= 0) return Double.NaN;  //throw new argumentexep
             if (num == 0) return 0;
             double res = num;
             double prev = 0;
