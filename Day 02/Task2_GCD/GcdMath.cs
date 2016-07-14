@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task2_GCD
 {
-    public class GcdMath
+    public static class GcdMath
     {
         /// <summary>
         /// computes the greatest common divisor with Ewklide's algorithm
@@ -41,17 +41,8 @@ namespace Task2_GCD
         /// </summary>
         /// <param name="arg">Natural numbers</param>
         /// <returns>gcd(args)</returns>
-        public static int EwclideGcd(params int[] arg) 
-        {
-            if (arg.Length == 0) throw new ArgumentNullException();
-            if (arg.Length == 1) return arg[0];
-            int temp = arg[0];
-            foreach (var item in arg)
-            {
-                temp = EwclideGcd(temp, item);
-            }
-            return temp;
-        }
+        public static int EwclideGcd(params int[] arg) =>
+            MultiGCD(EwclideGcd, arg);
 
         /// <summary>
         /// computes the greatest common divisor with Ewklide's algorithm and save worktime
@@ -60,14 +51,9 @@ namespace Task2_GCD
         /// <param name="b">Second natural number</param>
         /// <param name="workedtime">Buffer for worktime</param>
         /// <returns>gcd(a,b)</returns>
-        public static int EwclideGcd(int a, int b,out double workedtime)
-        {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            var res = EwclideGcd(a, b);
-            watch.Stop();
-            workedtime = watch.ElapsedTicks;
-            return res;
-        }
+        public static int EwclideGcd(int a, int b, out double workedtime) =>
+            TimeDiagnostic(EwclideGcd, a, b, out workedtime);
+
 
         /// <summary>
         /// computes the greatest common divisor with Ewklide's algorithm with multiple arguments and save worktime
@@ -75,16 +61,8 @@ namespace Task2_GCD
         /// <param name="workedtime">Buffer for worktime</param>
         /// <param name="arg">Natural numbers</param>
         /// <returns>gcd(args)</returns>
-        public static int EwclideGcd(out double workedtime,params int[] arg)
-        {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            var res = EwclideGcd(arg);
-            watch.Stop();
-            workedtime = watch.ElapsedTicks;
-            return res;
-        }
-
-
+        public static int EwclideGcd(out double workedtime,params int[] arg) =>
+            TimeDiagnostic(EwclideGcd, arg, out workedtime);
 
         /// <summary>
         /// computes the greatest common divisor with Steine's algorithm
@@ -118,18 +96,9 @@ namespace Task2_GCD
         /// </summary>
         /// <param name="arg">Natural numbers</param>
         /// <returns>gcd(args)</returns>
-        public static int SteineGcd(params int[] arg)
-        {
+        public static int SteineGcd(params int[] arg) =>
+            MultiGCD(SteineGcd, arg);
 
-            if (arg.Length == 0) throw new ArgumentNullException();
-            if (arg.Length == 1) return arg[0];
-            int temp = arg[0];
-            foreach (var item in arg)
-            {
-                temp = SteineGcd(temp, item);
-            }
-            return temp;
-        }
 
         /// <summary>
         /// computes the greatest common divisor with Steine's algorithm and save worktime
@@ -138,14 +107,8 @@ namespace Task2_GCD
         /// <param name="b">Second natural number</param>
         /// <param name="workedtime">Buffer for wroktime</param>
         /// <returns>gcd(a,b)</returns>
-        public static int SteineGcd(int a, int b, out double workedtime)
-        {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-            var res = SteineGcd(a, b);
-            watch.Stop();
-            workedtime = watch.ElapsedTicks;
-            return res;
-        }
+        public static int SteineGcd(int a, int b, out double workedtime) =>
+            TimeDiagnostic(SteineGcd, a, b,out workedtime);
 
         /// <summary>
         /// computes the greatest common divisor with Steine's algorithm with multiple arguments and save worktime
@@ -153,13 +116,31 @@ namespace Task2_GCD
         /// <param name="workedtime">Buffer for worktime</param>
         /// <param name="arg">Natural numbers</param>
         /// <returns>gcd(args)</returns>
-        public static int SteineGcd(out double workedtime, params int[] arg)
+        public static int SteineGcd(out double workedtime, params int[] arg) =>
+            TimeDiagnostic(SteineGcd, arg, out workedtime);
+
+        private static int MultiGCD(Func<int,int,int> f,int[] arg)
+        {
+            if (arg.Length == 0) throw new ArgumentNullException();
+            if (arg.Length == 1) return arg[0];
+            int temp = arg[0];
+            foreach (var item in arg)
+            {
+                temp = f(temp, item);
+            }
+            return temp;
+        }
+        private static int TimeDiagnostic(Func<int, int, int> f, int a, int b, out double workedtime) =>
+            TimeDiagnostic((int[] x) => f(x[0],x[1]), new int[2] { a, b }, out workedtime);
+
+        private static int TimeDiagnostic(Func<int[],int> f, int[] arg, out double workedtime)
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            var res = SteineGcd(arg);
+            var res = f(arg);
             watch.Stop();
             workedtime = watch.ElapsedTicks;
             return res;
         }
+
     }
 }
